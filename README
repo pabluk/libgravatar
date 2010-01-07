@@ -3,7 +3,7 @@ Gravatar RPC
 About
 =====
 A library that provides a python interface to the Gravatar XMLRPC API
-
+API Details: http://en.gravatar.com/site/implement/xmlrpc
 
 Author
 ======

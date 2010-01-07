@@ -37,6 +37,8 @@ class gravatarrpc:
     Or you can use your Gravatar.com password
         gravatar = gravatarrpc('user@domain', password='1234')
         gravatar.test() # test the API
+
+    API Details: http://en.gravatar.com/site/implement/xmlrpc
     '''
 
     def __init__(self, email, apikey='', password=''):
