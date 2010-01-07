@@ -34,7 +34,7 @@ class gravatarrpc:
         gravatar = gravatarrpc('user@domain', apikey='1234')
         gravatar.test() # test the API
 
-    Or you can use Gravatar.com password
+    Or you can use your Gravatar.com password
         gravatar = gravatarrpc('user@domain', password='1234')
         gravatar.test() # test the API
     '''
