@@ -48,7 +48,20 @@ class gravatarrpc:
        self.params = {}
        self._instance = None
 
+    def test(self):
+        '''Test the API.'''
+        return self._call('test')
+
+    def userimages(self):
+        '''Return an array of userimages with your rating and url for this account.'''
+        return self._call('userimages')
+
+    def addresses(self):
+        '''Get a list of addresses for this account'''
+        return self._call('addresses')
+
     def _client(self):
+        '''Get an unique instance of the ServerProxy'''
         if self._instance is None:
             self._instance = xmlrpclib.ServerProxy(API_URI.format(md5(self.email).hexdigest()))
         return self._instance
@@ -61,12 +74,4 @@ class gravatarrpc:
         self.params['password'] = self.password
 
         return getattr(self._client(), 'grav.' + method, None)(params)
-
-    def test(self):
-        '''Test the API.'''
-        return self._call('test')
-
-    def userimages(self):
-        '''Return an array of userimages with your rating and url for this account.'''
-        return self._call('userimages')
 
