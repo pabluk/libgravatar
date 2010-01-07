@@ -60,6 +60,14 @@ class gravatarrpc:
         '''Get a list of addresses for this account'''
         return self._call('addresses')
 
+    def exists(self, hashes):
+        '''Check whether a hash has a gravatar.
+        The method receives an array de hashes
+            gravatarrpc.exists(['aaaaa', 'bbbbb'])
+        '''
+        params = {'hashes':hashes}
+        return self._call('exists', params)
+
     def _client(self):
         '''Get an unique instance of the ServerProxy'''
         if self._instance is None:
