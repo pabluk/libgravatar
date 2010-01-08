@@ -26,6 +26,7 @@ import os
 import xmlrpclib
 from hashlib import md5
 from base64 import b64encode
+from urllib import quote
 
 API_URI = 'https://secure.gravatar.com/xmlrpc?user={0}'
 
@@ -79,6 +80,13 @@ class gravatarrpc:
             params['data'] = b64encode(f.read())
 
         return self._call('saveData', params)
+
+    def saveUrl(self, url, rating=0):
+        '''Read an image via its URL and save that as a userimage for this account.'''
+        params = {'rating':rating}
+        params['url'] = quote(url)
+
+        return self._call('saveUrl', params)
 
     def _client(self):
         '''Get an unique instance of the ServerProxy'''
