@@ -22,8 +22,10 @@
 __author__ = 'pabluk@gmail.com'
 __version__ = '0.1'
 
+import os
 import xmlrpclib
 from hashlib import md5
+from base64 import b64encode
 
 API_URI = 'https://secure.gravatar.com/xmlrpc?user={0}'
 
@@ -67,6 +69,16 @@ class gravatarrpc:
         '''
         params = {'hashes':hashes}
         return self._call('exists', params)
+
+    def saveData(self, file, rating=0):
+        '''Save binary image data as a userimage for this account.'''
+        params = {'rating':rating}
+
+        if os.path.isfile(file):
+            f = open(file)
+            params['data'] = b64encode(f.read())
+
+        return self._call('saveData', params)
 
     def _client(self):
         '''Get an unique instance of the ServerProxy'''
