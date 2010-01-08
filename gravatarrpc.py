@@ -45,10 +45,10 @@ class gravatarrpc:
     '''
 
     def __init__(self, email, apikey='', password=''):
-       self.apikey = apikey
-       self.password = password
-       self.email = str.lower(str.strip(email))
-       self._instance = None
+        self.apikey = apikey
+        self.password = password
+        self.email = str.lower(str.strip(email))
+        self._server = xmlrpclib.ServerProxy(API_URI.format(md5(self.email).hexdigest()))
 
     def test(self):
         '''Test the API.'''
@@ -88,12 +88,6 @@ class gravatarrpc:
 
         return self._call('saveUrl', params)
 
-    def _client(self):
-        '''Get an unique instance of the ServerProxy'''
-        if self._instance is None:
-            self._instance = xmlrpclib.ServerProxy(API_URI.format(md5(self.email).hexdigest()))
-        return self._instance
-
     def _call(self, method, params={}):
         '''Call a method from the API, gets 'grav.' prepended to it.'''
 
@@ -101,5 +95,5 @@ class gravatarrpc:
         args['apikey'] = self.apikey
         args['password'] = self.password
 
-        return getattr(self._client(), 'grav.' + method, None)(args)
+        return getattr(self._server, 'grav.' + method, None)(args)
 
