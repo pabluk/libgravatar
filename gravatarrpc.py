@@ -48,7 +48,6 @@ class gravatarrpc:
        self.apikey = apikey
        self.password = password
        self.email = str.lower(str.strip(email))
-       self.params = {}
        self._instance = None
 
     def test(self):
@@ -73,18 +72,19 @@ class gravatarrpc:
 
     def saveData(self, file, rating=0):
         '''Save binary image data as a userimage for this account.'''
-        params = {'rating':rating}
-
+        data = ''
         if os.path.isfile(file):
             f = open(file)
-            params['data'] = b64encode(f.read())
+            data = b64encode(f.read())
+
+        params = {'rating':rating, 'data':data}
 
         return self._call('saveData', params)
 
     def saveUrl(self, url, rating=0):
         '''Read an image via its URL and save that as a userimage for this account.'''
-        params = {'rating':rating}
-        params['url'] = quote(url)
+
+        params = {'rating':rating, 'url':quote(url)}
 
         return self._call('saveUrl', params)
 
@@ -97,9 +97,9 @@ class gravatarrpc:
     def _call(self, method, params={}):
         '''Call a method from the API, gets 'grav.' prepended to it.'''
 
-        self.params = params
-        self.params['apikey'] = self.apikey
-        self.params['password'] = self.password
+        args = params
+        args['apikey'] = self.apikey
+        args['password'] = self.password
 
-        return getattr(self._client(), 'grav.' + method, None)(params)
+        return getattr(self._client(), 'grav.' + method, None)(args)
 
