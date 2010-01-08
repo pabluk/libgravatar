@@ -88,6 +88,27 @@ class gravatarrpc:
 
         return self._call('saveUrl', params)
 
+    def useUserimage(self, userimage, addresses):
+        '''Use a userimage as a gravatar for one of more addresses on this account.'''
+
+        params = {'userimage':userimage, 'addresses':addresses}
+
+        return self._call('useUserimage', params)
+
+    def removeImage(self, addresses):
+        '''Remove the userimage associated with one or more email addresses.'''
+
+        params = {'addresses':addresses}
+
+        return self._call('removeImage', params)
+
+    def deleteUserimage(self, userimage):
+        '''Remove a userimage from the account and any email addresses with which it is associated.'''
+
+        params = {'userimage':userimage}
+
+        return self._call('deleteUserimage', params)
+
     def _call(self, method, params={}):
         '''Call a method from the API, gets 'grav.' prepended to it.'''
 
