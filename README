@@ -1,8 +1,8 @@
-Gravatar RPC
+Gravatar XML-RPC
 
 About
 =====
-A library that provides a python interface to the Gravatar XMLRPC API
+A library that provides a Python interface to the Gravatar XML-RPC API
 API Details: http://en.gravatar.com/site/implement/xmlrpc
 
 Author
@@ -14,12 +14,12 @@ Pablo Seminario
 Usage
 =====
 If you have an account at Wordpress.com you can use your API Key
-    gravatar = gravatarrpc('user@domain', apikey='1234')
-    gravatar.test() # test the API
+    g = gravatar('user@domain', apikey='1234')
+    g.test() # test the API
 
 Or you can use your Gravatar.com password
-    gravatar = gravatarrpc('user@domain', password='1234')
-    gravatar.test() # test the API
+    g = gravatar('user@domain', password='1234')
+    g.test() # test the API
 
 License
 =======

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# gravatar-rpc - Copyright (c) 2009 Pablo Seminario
+# gravatar - Copyright (c) 2009 Pablo Seminario
 # This software is distributed under the terms of the GNU General
 # Public License
 #
@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-'''A library that provides a python interface to the Gravatar XMLRPC API'''
+'''A library that provides a Python interface to the Gravatar XML-RPC API'''
 
 __author__ = 'pabluk@gmail.com'
 __version__ = '0.1'
@@ -30,16 +30,16 @@ from urllib import quote
 
 API_URI = 'https://secure.gravatar.com/xmlrpc?user={0}'
 
-class gravatarrpc:
+class gravatar:
     '''This class encapsulates all methods from the API
     Usage:
     If you have an account at Wordpress.com you can use your API Key
-        gravatar = gravatarrpc('user@domain', apikey='1234')
-        gravatar.test() # test the API
+        g = gravatar('user@domain', apikey='1234')
+        g.test() # test the API
 
     Or you can use your Gravatar.com password
-        gravatar = gravatarrpc('user@domain', password='1234')
-        gravatar.test() # test the API
+        g = gravatar('user@domain', password='1234')
+        g.test() # test the API
 
     API Details: http://en.gravatar.com/site/implement/xmlrpc
     '''
@@ -65,7 +65,7 @@ class gravatarrpc:
     def exists(self, hashes):
         '''Check whether a hash has a gravatar.
         The method receives an array de hashes
-            gravatarrpc.exists(['aaaaa', 'bbbbb'])
+            gravatar.exists(['aaaaa', 'bbbbb'])
         '''
         params = {'hashes':hashes}
         return self._call('exists', params)
