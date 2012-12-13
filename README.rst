@@ -2,19 +2,16 @@
 Gravatar XML-RPC
 ================
 
-About
-=====
-
 A library that provides a Python 3 interface to the Gravatar XML-RPC API.
 API Details: http://en.gravatar.com/site/implement/xmlrpc
 
 Author
-======
+------
 
 Pablo Seminario <pabluk@gmail.com>
 
 Usage
-=====
+-----
 
 If you have an account at Wordpress.com you can use your API Key
 ::
@@ -29,7 +26,7 @@ Or you can use your Gravatar.com password
     g.test() # test the API
 
 License
-=======
+-------
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
