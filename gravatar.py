@@ -28,9 +28,56 @@ import xmlrpc.client
 from hashlib import md5
 
 
+class Gravatar(object):
+    """
+    This class encapsulates all the unauthenticated methods from APIs.
+
+    Gravatar Image Requests http://en.gravatar.com/site/implement/images/
+    Gravatar Profile Requests http://en.gravatar.com/site/implement/profiles/
+
+    """
+
+    def __init__(self, email):
+        self.email = sanitize_email(email)
+        self.email_hash = md5_hash(self.email)
+
+    def get_image(self, size=80, filetype_extension=True):
+        """
+        Returns an URL to the user profile image.
+        """
+        base_url = 'http://www.gravatar.com/avatar/' \
+            '{hash}{extension}?size={size}'
+        extension = '.jpg' if filetype_extension else ''
+
+        data = {
+            'hash': self.email_hash,
+            'extension': extension,
+            'size': size,
+        }
+        return base_url.format(**data)
+
+    def get_profile(self, data_format=''):
+        """
+        Returns an URL to the profile information associated with the
+        Gravatar account.
+        """
+        base_url = 'http://www.gravatar.com/{hash}{data_format}'
+
+        valid_formats = ['json', 'xml', 'php', 'vcf', 'qr']
+        if data_format and data_format in valid_formats:
+            data_format = '.%s' % data_format
+
+        data = {
+            'hash': self.email_hash,
+            'data_format': data_format,
+        }
+        return base_url.format(**data)
+
+
 class GravatarXMLRPC(object):
     """
-    This class encapsulates all methods from the API.
+    This class encapsulates all the authenticated methods from the XML-RPC API.
+
     API details: http://en.gravatar.com/site/implement/xmlrpc
     """
     API_URI = 'https://secure.gravatar.com/xmlrpc?user={0}'
@@ -38,8 +85,8 @@ class GravatarXMLRPC(object):
     def __init__(self, email, apikey='', password=''):
         self.apikey = apikey
         self.password = password
-        self.email = email.lower().strip()
-        self.email_hash = md5(email.encode('utf-8')).hexdigest()
+        self.email = sanitize_email(email)
+        self.email_hash = md5_hash(self.email)
         self._server = xmlrpc.client.ServerProxy(
             self.API_URI.format(self.email_hash))
 
@@ -77,3 +124,26 @@ class GravatarXMLRPC(object):
         except xmlrpc.client.Fault as error:
             error_msg = "Server error: {1} (error code: {0})"
             print(error_msg.format(error.faultCode, error.faultString))
+
+
+def sanitize_email(email):
+    """
+    Returns an e-mail address in lower-case and strip leading and trailing
+    whitespaces.
+
+    >>> sanitize_email(' MyEmailAddress@example.com ')
+    'myemailaddress@example.com'
+
+    """
+    return email.lower().strip()
+
+
+def md5_hash(email):
+    """
+    Returns a md5 hash from an e-mail address.
+
+    >>> md5_hash('myemailaddress@example.com')
+    '0bc83cb571cd1c50ba6f3e8a78ef1346'
+
+    """
+    return md5(email.encode('utf-8')).hexdigest()

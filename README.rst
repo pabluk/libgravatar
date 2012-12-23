@@ -13,18 +13,26 @@ Pablo Seminario <pabluk@gmail.com>
 Usage
 -----
 
-If you have an account at Wordpress.com you can use your API Key
+Getting user profile image
 ::
 
     from gravatar import Gravatar
-    g = Gravatar('user@domain', apikey='1234')
+    g = Gravatar('myemailaddress@example.com')
+    g.get_image()
+    'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346.jpg?size=80'
+
+If you have an account at Wordpress.com you can use your API Key
+::
+
+    from gravatar import GravatarXMLRPC
+    g = GravatarXMLRPC('user@domain', apikey='1234')
     g.test() # test the API
 
 Or you can use your Gravatar.com password
 ::
 
-    from gravatar import Gravatar
-    g = Gravatar('user@domain', password='1234')
+    from gravatar import GravatarXMLRPC
+    g = GravatarXMLRPC('user@domain', password='1234')
     g.test() # test the API
 
 License
