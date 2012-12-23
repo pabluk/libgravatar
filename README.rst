@@ -16,13 +16,15 @@ Usage
 If you have an account at Wordpress.com you can use your API Key
 ::
 
-    g = gravatar('user@domain', apikey='1234')
+    from gravatar import Gravatar
+    g = Gravatar('user@domain', apikey='1234')
     g.test() # test the API
 
 Or you can use your Gravatar.com password
 ::
 
-    g = gravatar('user@domain', password='1234')
+    from gravatar import Gravatar
+    g = Gravatar('user@domain', password='1234')
     g.test() # test the API
 
 License
