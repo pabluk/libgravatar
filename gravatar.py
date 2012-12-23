@@ -8,17 +8,17 @@
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-A library that provides a Python 3 interface to the Gravatar XML-RPC API.
+A library that provides a Python 3 interface to the Gravatar APIs.
 """
 
 __author__ = 'Pablo SEMINARIO <pabluk@gmail.com>'
@@ -27,25 +27,25 @@ __version__ = '0.2'
 import xmlrpc.client
 from hashlib import md5
 
-API_URI = 'https://secure.gravatar.com/xmlrpc?user={0}'
 
-
-class Gravatar(object):
+class GravatarXMLRPC(object):
     """
     This class encapsulates all methods from the API.
     API details: http://en.gravatar.com/site/implement/xmlrpc
     """
+    API_URI = 'https://secure.gravatar.com/xmlrpc?user={0}'
 
     def __init__(self, email, apikey='', password=''):
         self.apikey = apikey
         self.password = password
         self.email = email.lower().strip()
         self.email_hash = md5(email.encode('utf-8')).hexdigest()
-        self._server = xmlrpc.client.ServerProxy(API_URI.format(self.email_hash))
+        self._server = xmlrpc.client.ServerProxy(
+            self.API_URI.format(self.email_hash))
 
     def exists(self, hashes):
         """Checks whether a hash has a gravatar."""
-        response = self._call('exists', params={'hashes':hashes})
+        response = self._call('exists', params={'hashes': hashes})
         results = {}
         for key, value in response.items():
             results[key] = True if value else False
@@ -75,9 +75,5 @@ class Gravatar(object):
         try:
             return getattr(self._server, 'grav.' + method, None)(args)
         except xmlrpc.client.Fault as error:
-            print("Server error: {1} (error code: {0})".format(error.faultCode, error.faultString))
-
-
-if __name__ == '__main__':
-    g = Gravatar('user@example.com', password='12345')
-    g.test()
+            error_msg = "Server error: {1} (error code: {0})"
+            print(error_msg.format(error.faultCode, error.faultString))
