@@ -55,6 +55,10 @@ class Gravatar(object):
         """Gets a list of addresses for this account."""
         return self._call('addresses')
 
+    def userimages(self):
+        """Returns a dict of userimages for this account."""
+        return self._call('userimages')
+
     def test(self):
         """Test the API."""
         return self._call('test')
