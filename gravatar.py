@@ -51,6 +51,10 @@ class Gravatar(object):
             results[key] = True if value else False
         return results
 
+    def addresses(self):
+        """Gets a list of addresses for this account."""
+        return self._call('addresses')
+
     def test(self):
         """Test the API."""
         return self._call('test')
