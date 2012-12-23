@@ -43,6 +43,14 @@ class Gravatar(object):
         self.email_hash = md5(email.encode('utf-8')).hexdigest()
         self._server = xmlrpc.client.ServerProxy(API_URI.format(self.email_hash))
 
+    def exists(self, hashes):
+        """Checks whether a hash has a gravatar."""
+        response = self._call('exists', params={'hashes':hashes})
+        results = {}
+        for key, value in response.items():
+            results[key] = True if value else False
+        return results
+
     def test(self):
         """Test the API."""
         return self._call('test')
