@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-#
 # libgravatar - Copyright (c) 2009 Pablo SEMINARIO
 # This software is distributed under the terms of the GNU General
 # Public License
