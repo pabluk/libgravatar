@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# python-gravatar - Copyright (c) 2009 Pablo Seminario
+# libgravatar - Copyright (c) 2009 Pablo SEMINARIO
 # This software is distributed under the terms of the GNU General
 # Public License
 #
@@ -22,7 +22,7 @@ A library that provides a Python 3 interface to the Gravatar APIs.
 """
 
 __author__ = 'Pablo SEMINARIO <pabluk@gmail.com>'
-__version__ = '0.2'
+__version__ = '0.1'
 
 import xmlrpc.client
 from hashlib import md5
