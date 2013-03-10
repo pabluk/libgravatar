@@ -51,7 +51,7 @@ class Gravatar(object):
         self.email = sanitize_email(email)
         self.email_hash = md5_hash(self.email)
 
-    def get_image(self, size=DEFAULT_IMAGE_SIZE, default='', filetype_extension=False):
+    def get_image(self, size=DEFAULT_IMAGE_SIZE, default='', force_default=False, filetype_extension=False):
         """
         Returns an URL to the user profile image.
 
@@ -81,6 +81,10 @@ class Gravatar(object):
         ...
         ValueError: Your URL for the default image is not valid.
 
+        >>> g = Gravatar('myemailaddress@example.com')
+        >>> g.get_image(force_default=True)
+        'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346?forcedefault=y'
+
         """
         base_url = 'http://www.gravatar.com/avatar/' \
             '{hash}{extension}{params}'
@@ -88,6 +92,7 @@ class Gravatar(object):
         params_dict = {
             'size': size,
             'default': default,
+            'forcedefault': force_default,
         }
 
         if params_dict['size'] == self.DEFAULT_IMAGE_SIZE:
@@ -98,6 +103,10 @@ class Gravatar(object):
             if not params_dict['default'] in self.DEFAULT_IMAGE:
                 if not default_url_is_valid(params_dict['default']):
                     raise ValueError('Your URL for the default image is not valid.')
+        if params_dict['forcedefault']:
+            params_dict['forcedefault'] = 'y'
+        else:
+            del params_dict['forcedefault']
 
         params = urlencode(params_dict)
 
