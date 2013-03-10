@@ -45,14 +45,14 @@ Gravatar XML-RPC API
 
 The XML-RPC API require authentication.
 
-Or you can use your Gravatar.com password::
+You can use your Gravatar.com password::
 
     from libgravatar import GravatarXMLRPC
     g = GravatarXMLRPC('user@domain', password='1234')
     g.test() # test the API
 
 
-If you have an account at Wordpress.com you can use your API Key::
+or if you have an account at Wordpress.com you can use your API Key::
 
     from libgravatar import GravatarXMLRPC
     g = GravatarXMLRPC('user@domain', apikey='1234')
