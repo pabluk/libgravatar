@@ -6,7 +6,7 @@ with open('README.rst') as file:
 
 
 setup(name='libgravatar',
-      version='0.1',
+      version='0.2.0',
       author='Pablo SEMINARIO',
       author_email='pabluk@gmail.com',
       url='https://github.com/pabluk/libgravatar',
@@ -14,7 +14,7 @@ setup(name='libgravatar',
       description='A library that provides a Python 3 interface for the Gravatar API.',
       long_description=long_description,
       packages=['libgravatar'],
-      provides=['libgravatar (0.1)'],
+      provides=['libgravatar (0.2.0)'],
       classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
