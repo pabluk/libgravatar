@@ -35,27 +35,47 @@ class Gravatar(object):
 
     """
 
+    DEFAULT_IMAGE_SIZE = 80
+
     def __init__(self, email):
         self.email = sanitize_email(email)
         self.email_hash = md5_hash(self.email)
 
-    def get_image(self, size=80, filetype_extension=True):
+    def get_image(self, size=DEFAULT_IMAGE_SIZE, filetype_extension=False):
         """
         Returns an URL to the user profile image.
 
-        >>> g = Gravatar(' MyEmailAddress@example.com ')
+        >>> g = Gravatar('myemailaddress@example.com')
         >>> g.get_image()
-        'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346.jpg?size=80'
+        'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346'
+
+        >>> g = Gravatar('myemailaddress@example.com')
+        >>> g.get_image(size=24)
+        'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346?size=24'
+
+        >>> g = Gravatar('myemailaddress@example.com')
+        >>> g.get_image(filetype_extension=True)
+        'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346.jpg'
 
         """
         base_url = 'http://www.gravatar.com/avatar/' \
-            '{hash}{extension}?size={size}'
-        extension = '.jpg' if filetype_extension else ''
+            '{hash}{extension}{params}'
 
+        params_dict = {
+            'size': size,
+        }
+
+        if params_dict['size'] == self.DEFAULT_IMAGE_SIZE:
+            del params_dict['size']
+
+        params = "&".join(['%s=%s' % (k, v) for k, v in params_dict.items()])
+
+        extension = '.jpg' if filetype_extension else ''
+        params = '?%s' % params if params else ''
         data = {
             'hash': self.email_hash,
             'extension': extension,
-            'size': size,
+            'params': params,
         }
         return base_url.format(**data)
 
