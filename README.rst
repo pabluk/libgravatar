@@ -5,6 +5,14 @@ libgravatar
 A library that provides a Python 3 interface for the Gravatar API.
 API details: https://en.gravatar.com/site/implement/
 
+Installation
+------------
+
+Install via pip::
+
+    $ pip install libgravatar
+
+
 Usage
 -----
 
