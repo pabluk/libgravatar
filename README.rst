@@ -2,6 +2,10 @@
 libgravatar
 ===========
 
+
+.. image:: https://travis-ci.org/pabluk/libgravatar.png?branch=master
+        :target: https://travis-ci.org/pabluk/libgravatar
+
 A library that provides a Python 3 interface for the Gravatar API.
 API details: https://en.gravatar.com/site/implement/
 
