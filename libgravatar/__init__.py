@@ -28,7 +28,7 @@ from hashlib import md5
 
 class Gravatar(object):
     """
-    This class encapsulates all the unauthenticated methods from APIs.
+    This class encapsulates all the unauthenticated methods from the API.
 
     Gravatar Image Requests http://en.gravatar.com/site/implement/images/
     Gravatar Profile Requests http://en.gravatar.com/site/implement/profiles/
@@ -42,6 +42,11 @@ class Gravatar(object):
     def get_image(self, size=80, filetype_extension=True):
         """
         Returns an URL to the user profile image.
+
+        >>> g = Gravatar(' MyEmailAddress@example.com ')
+        >>> g.get_image()
+        'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346.jpg?size=80'
+
         """
         base_url = 'http://www.gravatar.com/avatar/' \
             '{hash}{extension}?size={size}'
@@ -58,6 +63,11 @@ class Gravatar(object):
         """
         Returns an URL to the profile information associated with the
         Gravatar account.
+
+        >>> g = Gravatar(' MyEmailAddress@example.com ')
+        >>> g.get_profile()
+        'http://www.gravatar.com/0bc83cb571cd1c50ba6f3e8a78ef1346'
+
         """
         base_url = 'http://www.gravatar.com/{hash}{data_format}'
 
