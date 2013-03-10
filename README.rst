@@ -20,22 +20,41 @@ Install via pip::
 Usage
 -----
 
-Getting user profile image::
+Gravatar API
+~~~~~~~~~~~~
+
+Gravatar API require no authentication to get images and profiles URLs.
+
+Getting the user profile image::
 
     from libgravatar import Gravatar
     g = Gravatar('myemailaddress@example.com')
     g.get_image()
     'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346.jpg?size=80'
 
-If you have an account at Wordpress.com you can use your API Key::
+Getting the profile URL::
 
-    from libgravatar import GravatarXMLRPC
-    g = GravatarXMLRPC('user@domain', apikey='1234')
-    g.test() # test the API
+    from libgravatar import Gravatar
+    g = Gravatar('myemailaddress@example.com')
+    g.get_profile()
+    'http://www.gravatar.com/0bc83cb571cd1c50ba6f3e8a78ef1346'
+
+
+Gravatar XML-RPC API
+~~~~~~~~~~~~~~~~~~~~
+
+The XML-RPC API require authentication.
 
 Or you can use your Gravatar.com password::
 
     from libgravatar import GravatarXMLRPC
     g = GravatarXMLRPC('user@domain', password='1234')
+    g.test() # test the API
+
+
+If you have an account at Wordpress.com you can use your API Key::
+
+    from libgravatar import GravatarXMLRPC
+    g = GravatarXMLRPC('user@domain', apikey='1234')
     g.test() # test the API
 
