@@ -51,7 +51,7 @@ class Gravatar(object):
         self.email = sanitize_email(email)
         self.email_hash = md5_hash(self.email)
 
-    def get_image(self, size=DEFAULT_IMAGE_SIZE, default='', force_default=False, filetype_extension=False):
+    def get_image(self, size=DEFAULT_IMAGE_SIZE, default='', force_default=False, filetype_extension=False, use_ssl=False):
         """
         Returns an URL to the user profile image.
 
@@ -85,8 +85,12 @@ class Gravatar(object):
         >>> g.get_image(force_default=True)
         'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346?forcedefault=y'
 
+        >>> g = Gravatar('myemailaddress@example.com')
+        >>> g.get_image(use_ssl=True)
+        'https://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346'
+
         """
-        base_url = 'http://www.gravatar.com/avatar/' \
+        base_url = '{protocol}://www.gravatar.com/avatar/' \
             '{hash}{extension}{params}'
 
         params_dict = {
@@ -110,9 +114,11 @@ class Gravatar(object):
 
         params = urlencode(params_dict)
 
+        protocol = 'https' if use_ssl else 'http'
         extension = '.jpg' if filetype_extension else ''
         params = '?%s' % params if params else ''
         data = {
+            'protocol': protocol,
             'hash': self.email_hash,
             'extension': extension,
             'params': params,
