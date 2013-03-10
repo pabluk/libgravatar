@@ -46,12 +46,18 @@ class Gravatar(object):
         'retro',
         'blank',
     ]
+    RATINGS = [
+        'g',
+        'pg',
+        'r',
+        'x',
+    ]
 
     def __init__(self, email):
         self.email = sanitize_email(email)
         self.email_hash = md5_hash(self.email)
 
-    def get_image(self, size=DEFAULT_IMAGE_SIZE, default='', force_default=False, filetype_extension=False, use_ssl=False):
+    def get_image(self, size=DEFAULT_IMAGE_SIZE, default='', force_default=False, rating='', filetype_extension=False, use_ssl=False):
         """
         Returns an URL to the user profile image.
 
@@ -89,6 +95,16 @@ class Gravatar(object):
         >>> g.get_image(use_ssl=True)
         'https://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346'
 
+        >>> g = Gravatar('myemailaddress@example.com')
+        >>> g.get_image(rating='pg')
+        'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346?rating=pg'
+
+        >>> g = Gravatar('myemailaddress@example.com')
+        >>> g.get_image(rating='invalid')
+        Traceback (most recent call last):
+        ...
+        ValueError: Invalid rating value.
+
         """
         base_url = '{protocol}://www.gravatar.com/avatar/' \
             '{hash}{extension}{params}'
@@ -97,6 +113,7 @@ class Gravatar(object):
             'size': size,
             'default': default,
             'forcedefault': force_default,
+            'rating': rating,
         }
 
         if params_dict['size'] == self.DEFAULT_IMAGE_SIZE:
@@ -111,6 +128,11 @@ class Gravatar(object):
             params_dict['forcedefault'] = 'y'
         else:
             del params_dict['forcedefault']
+        if params_dict['rating'] == '':
+            del params_dict['rating']
+        else:
+            if not params_dict['rating'] in self.RATINGS:
+                raise ValueError('Invalid rating value.')
 
         params = urlencode(params_dict)
 
