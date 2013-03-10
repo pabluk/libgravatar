@@ -1,4 +1,4 @@
 language: python
 python:
   - "3.2"
-script: nosetests --with-doctest
+script: nosetests -v --with-doctest
