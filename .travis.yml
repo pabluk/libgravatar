@@ -1,4 +1,4 @@
 language: python
 python:
   - "3.2"
-script: nosetests -v --with-doctest
+script: python -m doctest -v libgravatar/__init__.py
