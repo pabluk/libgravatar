@@ -146,12 +146,15 @@ def sanitize_email(email):
     return email.lower().strip()
 
 
-def md5_hash(email):
+def md5_hash(string):
     """
-    Returns a md5 hash from an e-mail address.
+    Returns a md5 hash from a string.
 
     >>> md5_hash('myemailaddress@example.com')
     '0bc83cb571cd1c50ba6f3e8a78ef1346'
 
+    >>> md5_hash('')
+    'd41d8cd98f00b204e9800998ecf8427e'
+
     """
-    return md5(email.encode('utf-8')).hexdigest()
+    return md5(string.encode('utf-8')).hexdigest()
