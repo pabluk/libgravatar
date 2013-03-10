@@ -24,6 +24,7 @@ __version__ = '0.2.0'
 
 import xmlrpc.client
 from hashlib import md5
+from urllib.parse import urlparse, urlencode
 
 
 class Gravatar(object):
@@ -36,12 +37,21 @@ class Gravatar(object):
     """
 
     DEFAULT_IMAGE_SIZE = 80
+    DEFAULT_IMAGE = [
+        '404',
+        'mm',
+        'identicon',
+        'monsterid',
+        'wavatar',
+        'retro',
+        'blank',
+    ]
 
     def __init__(self, email):
         self.email = sanitize_email(email)
         self.email_hash = md5_hash(self.email)
 
-    def get_image(self, size=DEFAULT_IMAGE_SIZE, filetype_extension=False):
+    def get_image(self, size=DEFAULT_IMAGE_SIZE, default='', filetype_extension=False):
         """
         Returns an URL to the user profile image.
 
@@ -57,18 +67,39 @@ class Gravatar(object):
         >>> g.get_image(filetype_extension=True)
         'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346.jpg'
 
+        >>> g = Gravatar('myemailaddress@example.com')
+        >>> g.get_image(default='monsterid')
+        'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346?default=monsterid'
+
+        >>> g = Gravatar('myemailaddress@example.com')
+        >>> g.get_image(default='http://example.com/images/avatar.jpg')
+        'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346?default=http%3A%2F%2Fexample.com%2Fimages%2Favatar.jpg'
+
+        >>> g = Gravatar('myemailaddress@example.com')
+        >>> g.get_image(default='ftp://example.com/images/avatar.php?key=value')
+        Traceback (most recent call last):
+        ...
+        ValueError: Your URL for the default image is not valid.
+
         """
         base_url = 'http://www.gravatar.com/avatar/' \
             '{hash}{extension}{params}'
 
         params_dict = {
             'size': size,
+            'default': default,
         }
 
         if params_dict['size'] == self.DEFAULT_IMAGE_SIZE:
             del params_dict['size']
+        if params_dict['default'] == '':
+            del params_dict['default']
+        else:
+            if not params_dict['default'] in self.DEFAULT_IMAGE:
+                if not default_url_is_valid(params_dict['default']):
+                    raise ValueError('Your URL for the default image is not valid.')
 
-        params = "&".join(['%s=%s' % (k, v) for k, v in params_dict.items()])
+        params = urlencode(params_dict)
 
         extension = '.jpg' if filetype_extension else ''
         params = '?%s' % params if params else ''
@@ -100,7 +131,6 @@ class Gravatar(object):
             'data_format': data_format,
         }
         return base_url.format(**data)
-
 
 class GravatarXMLRPC(object):
     """
@@ -181,3 +211,34 @@ def md5_hash(string):
 
     """
     return md5(string.encode('utf-8')).hexdigest()
+
+
+def default_url_is_valid(url):
+    """
+    Gravatar conditions for valid default URLs.
+
+    >>> default_url_is_valid('http://example.com/images/avatar.jpg')
+    True
+
+    >>> default_url_is_valid('https://example.com/images/avatar.jpg')
+    True
+
+    >>> default_url_is_valid('ftp://example.com/images/avatar.jpg')
+    False
+
+    >>> default_url_is_valid('http://example.com/images/avatar.php')
+    False
+
+    >>> default_url_is_valid('http://example.com/images/avatar.jpg?key=value')
+    False
+
+    """
+    result = urlparse(url)
+
+    if result.scheme == 'http' or result.scheme == 'https':
+        path = result.path.lower()
+        if (path.endswith('.jpg') or path.endswith('.jpeg')
+            or path.endswith('.gif') or path.endswith('.png')):
+            if not result.query:
+                return True
+    return False
