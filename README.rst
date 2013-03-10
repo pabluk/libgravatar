@@ -30,7 +30,7 @@ Getting the user profile image::
     from libgravatar import Gravatar
     g = Gravatar('myemailaddress@example.com')
     g.get_image()
-    'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346.jpg?size=80'
+    'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346'
 
 Getting the profile URL::
 
