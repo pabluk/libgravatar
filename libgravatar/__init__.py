@@ -142,6 +142,9 @@ def sanitize_email(email):
     >>> sanitize_email(' MyEmailAddress@example.com ')
     'myemailaddress@example.com'
 
+    >>> sanitize_email('myemailaddress@example.com')
+    'myemailaddress@example.com'
+
     """
     return email.lower().strip()
 
