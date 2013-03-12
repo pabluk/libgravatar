@@ -75,46 +75,6 @@ class Gravatar(object):
         >>> g.get_image()
         'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346'
 
-        >>> g = Gravatar('myemailaddress@example.com')
-        >>> g.get_image(size=24)
-        'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346?size=24'
-
-        >>> g = Gravatar('myemailaddress@example.com')
-        >>> g.get_image(filetype_extension=True)
-        'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346.jpg'
-
-        >>> g = Gravatar('myemailaddress@example.com')
-        >>> g.get_image(default='monsterid')
-        'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346?default=monsterid'
-
-        >>> g = Gravatar('myemailaddress@example.com')
-        >>> g.get_image(default='http://example.com/images/avatar.jpg')
-        'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346?default=http%3A%2F%2Fexample.com%2Fimages%2Favatar.jpg'
-
-        >>> g = Gravatar('myemailaddress@example.com')
-        >>> g.get_image(default='ftp://example.com/images/avatar.php?key=value')
-        Traceback (most recent call last):
-        ...
-        ValueError: Your URL for the default image is not valid.
-
-        >>> g = Gravatar('myemailaddress@example.com')
-        >>> g.get_image(force_default=True)
-        'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346?forcedefault=y'
-
-        >>> g = Gravatar('myemailaddress@example.com')
-        >>> g.get_image(use_ssl=True)
-        'https://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346'
-
-        >>> g = Gravatar('myemailaddress@example.com')
-        >>> g.get_image(rating='pg')
-        'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346?rating=pg'
-
-        >>> g = Gravatar('myemailaddress@example.com')
-        >>> g.get_image(rating='invalid')
-        Traceback (most recent call last):
-        ...
-        ValueError: Invalid rating value.
-
         """
         base_url = '{protocol}://www.gravatar.com/avatar/' \
             '{hash}{extension}{params}'
@@ -239,9 +199,6 @@ def sanitize_email(email):
     >>> sanitize_email(' MyEmailAddress@example.com ')
     'myemailaddress@example.com'
 
-    >>> sanitize_email('myemailaddress@example.com')
-    'myemailaddress@example.com'
-
     """
     return email.lower().strip()
 
@@ -253,9 +210,6 @@ def md5_hash(string):
     >>> md5_hash('myemailaddress@example.com')
     '0bc83cb571cd1c50ba6f3e8a78ef1346'
 
-    >>> md5_hash('')
-    'd41d8cd98f00b204e9800998ecf8427e'
-
     """
     return md5(string.encode('utf-8')).hexdigest()
 
@@ -266,18 +220,6 @@ def default_url_is_valid(url):
 
     >>> default_url_is_valid('http://example.com/images/avatar.jpg')
     True
-
-    >>> default_url_is_valid('https://example.com/images/avatar.jpg')
-    True
-
-    >>> default_url_is_valid('ftp://example.com/images/avatar.jpg')
-    False
-
-    >>> default_url_is_valid('http://example.com/images/avatar.php')
-    False
-
-    >>> default_url_is_valid('http://example.com/images/avatar.jpg?key=value')
-    False
 
     """
     result = urlparse(url)
