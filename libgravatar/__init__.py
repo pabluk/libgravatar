@@ -67,12 +67,24 @@ class Gravatar(object):
         """
         Returns an URL to the user profile image.
 
-        With *size* you can request a specific image size, by default, images are presented at 80px by 80px.
-        You may request image anywhere from 1px up to 2048px.
-
         >>> g = Gravatar('myemailaddress@example.com')
         >>> g.get_image()
         'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346'
+
+        With *size* you can request a specific image size, by default, images are presented at 80px by 80px.
+        You may request image anywhere from 1px up to 2048px.
+
+        The *default* parameter is used to supply a default image when an email address has no match Gravatar image.
+        *default* can be an URL or one of the built in options *404*, *mm*, *identicon*, *monsterid*, *wavatar*, *retro* or *blank*.
+
+        *force_default* force the default image to always load.
+
+        *rating* can be used to request images by audience type. Possible values are *g*, *pg*, *r* or *x*.
+        By default, only *g* rated images are displayed.
+
+        *filetype_extension* add an optional `.jpg` extension.
+
+        *use_ssl* can be used to request images via SSL.
 
         See more details on `Gravatar Image Requests <http://en.gravatar.com/site/implement/images/>`_.
 
@@ -125,11 +137,11 @@ class Gravatar(object):
         """
         Returns an URL to the profile information associated with the Gravatar account.
 
-        See more details on `Gravatar Profile Requests <http://en.gravatar.com/site/implement/profiles/>`_.
-
         >>> g = Gravatar(' MyEmailAddress@example.com ')
         >>> g.get_profile()
         'http://www.gravatar.com/0bc83cb571cd1c50ba6f3e8a78ef1346'
+
+        See more details on `Gravatar Profile Requests <http://en.gravatar.com/site/implement/profiles/>`_.
 
         """
         base_url = 'http://www.gravatar.com/{hash}{data_format}'
