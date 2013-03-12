@@ -21,6 +21,11 @@ class GravatarTestCase(unittest.TestCase):
         result = self.g.get_image(size=24)
         self.assertEqual(image_url, result)
 
+    def test_invalid_image_size(self):
+        """Test an invalid image size value."""
+        self.assertRaises(ValueError, self.g.get_image, size=0)
+        self.assertRaises(ValueError, self.g.get_image, size=2049)
+
     def test_filetype_extension(self):
         """Test filetype_extension parameter."""
         image_url = 'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346.jpg'

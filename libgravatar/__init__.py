@@ -40,10 +40,6 @@ from hashlib import md5
 class Gravatar(object):
     """
     This class encapsulates all the unauthenticated methods from the API.
-
-    Gravatar Image Requests http://en.gravatar.com/site/implement/images/
-    Gravatar Profile Requests http://en.gravatar.com/site/implement/profiles/
-
     """
 
     DEFAULT_IMAGE_SIZE = 80
@@ -67,13 +63,18 @@ class Gravatar(object):
         self.email = sanitize_email(email)
         self.email_hash = md5_hash(self.email)
 
-    def get_image(self, size=DEFAULT_IMAGE_SIZE, default='', force_default=False, rating='', filetype_extension=False, use_ssl=False):
+    def get_image(self, size=DEFAULT_IMAGE_SIZE, default="", force_default=False, rating="", filetype_extension=False, use_ssl=False):
         """
         Returns an URL to the user profile image.
+
+        With *size* you can request a specific image size, by default, images are presented at 80px by 80px.
+        You may request image anywhere from 1px up to 2048px.
 
         >>> g = Gravatar('myemailaddress@example.com')
         >>> g.get_image()
         'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346'
+
+        See more details on `Gravatar Image Requests <http://en.gravatar.com/site/implement/images/>`_.
 
         """
         base_url = '{protocol}://www.gravatar.com/avatar/' \
@@ -88,6 +89,9 @@ class Gravatar(object):
 
         if params_dict['size'] == self.DEFAULT_IMAGE_SIZE:
             del params_dict['size']
+        else:
+            if not (0 < params_dict['size'] < 2048):
+                raise ValueError('Invalid image size.')
         if params_dict['default'] == '':
             del params_dict['default']
         else:
@@ -119,8 +123,9 @@ class Gravatar(object):
 
     def get_profile(self, data_format=''):
         """
-        Returns an URL to the profile information associated with the
-        Gravatar account.
+        Returns an URL to the profile information associated with the Gravatar account.
+
+        See more details on `Gravatar Profile Requests <http://en.gravatar.com/site/implement/profiles/>`_.
 
         >>> g = Gravatar(' MyEmailAddress@example.com ')
         >>> g.get_profile()
