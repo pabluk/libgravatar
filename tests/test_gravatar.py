@@ -53,7 +53,7 @@ class GravatarTestCase(unittest.TestCase):
 
     def test_use_ssl(self):
         """Test use_ssl parameter."""
-        image_url = 'https://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346'
+        image_url = 'https://secure.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346'
         result = self.g.get_image(use_ssl=True)
         self.assertEqual(image_url, result)
 

@@ -89,7 +89,7 @@ class Gravatar(object):
         See more details on `Gravatar Image Requests <http://en.gravatar.com/site/implement/images/>`_.
 
         """
-        base_url = '{protocol}://www.gravatar.com/avatar/' \
+        base_url = '{protocol}://{domain}/avatar/' \
             '{hash}{extension}{params}'
 
         params_dict = {
@@ -122,11 +122,17 @@ class Gravatar(object):
 
         params = urlencode(params_dict)
 
-        protocol = 'https' if use_ssl else 'http'
+        protocol = 'http'
+        domain = 'www.gravatar.com'
+        if use_ssl:
+            protocol = 'https'
+            domain = 'secure.gravatar.com'
+
         extension = '.jpg' if filetype_extension else ''
         params = '?%s' % params if params else ''
         data = {
             'protocol': protocol,
+            'domain': domain,
             'hash': self.email_hash,
             'extension': extension,
             'params': params,
