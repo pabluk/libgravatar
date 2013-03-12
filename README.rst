@@ -20,6 +20,8 @@ Install via pip::
 Usage
 -----
 
+See more details on https://libgravatar.readthedocs.org/
+
 Gravatar API
 ~~~~~~~~~~~~
 
