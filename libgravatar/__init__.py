@@ -22,9 +22,19 @@ A library that provides a Python 3 interface to the Gravatar APIs.
 __author__ = 'Pablo SEMINARIO <pabluk@gmail.com>'
 __version__ = '0.2.1'
 
-import xmlrpc.client
+import sys
+
+if sys.version_info[0] < 3:
+    # Python 2.x
+    from xmlrpclib import ServerProxy, Fault
+    from urlparse import urlparse
+    from urllib import urlencode
+else:
+    # Python 3.x
+    from xmlrpc.client import ServerProxy, Fault
+    from urllib.parse import urlparse, urlencode
+
 from hashlib import md5
-from urllib.parse import urlparse, urlencode
 
 
 class Gravatar(object):
@@ -182,7 +192,7 @@ class GravatarXMLRPC(object):
         self.password = password
         self.email = sanitize_email(email)
         self.email_hash = md5_hash(self.email)
-        self._server = xmlrpc.client.ServerProxy(
+        self._server = ServerProxy(
             self.API_URI.format(self.email_hash))
 
     def exists(self, hashes):
@@ -216,7 +226,7 @@ class GravatarXMLRPC(object):
 
         try:
             return getattr(self._server, 'grav.' + method, None)(args)
-        except xmlrpc.client.Fault as error:
+        except Fault as error:
             error_msg = "Server error: {1} (error code: {0})"
             print(error_msg.format(error.faultCode, error.faultString))
 
