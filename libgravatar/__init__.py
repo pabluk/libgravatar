@@ -58,6 +58,7 @@ class Gravatar(object):
         'r',
         'x',
     ]
+    PROFILE_FORMATS = ['json', 'xml', 'php', 'vcf', 'qr']
 
     def __init__(self, email):
         self.email = sanitize_email(email)
@@ -143,7 +144,7 @@ class Gravatar(object):
         """
         Returns an URL to the profile information associated with the Gravatar account.
 
-        >>> g = Gravatar(' MyEmailAddress@example.com ')
+        >>> g = Gravatar('myemailaddress@example.com')
         >>> g.get_profile()
         'http://www.gravatar.com/0bc83cb571cd1c50ba6f3e8a78ef1346'
 
@@ -152,8 +153,7 @@ class Gravatar(object):
         """
         base_url = 'http://www.gravatar.com/{hash}{data_format}'
 
-        valid_formats = ['json', 'xml', 'php', 'vcf', 'qr']
-        if data_format and data_format in valid_formats:
+        if data_format and data_format in self.PROFILE_FORMATS:
             data_format = '.%s' % data_format
 
         data = {

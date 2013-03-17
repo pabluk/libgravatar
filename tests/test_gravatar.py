@@ -3,8 +3,8 @@ import unittest
 from libgravatar import Gravatar
 
 
-class GravatarTestCase(unittest.TestCase):
-    """Test case for the Gravatar class."""
+class GravatarImageTestCase(unittest.TestCase):
+    """Test case for the Gravatar class and the get_image method."""
 
     def setUp(self):
         self.g = Gravatar('myemailaddress@example.com')
@@ -76,3 +76,18 @@ class GravatarTestCase(unittest.TestCase):
         self.assertEqual(image_url, result)
 
         self.assertRaises(ValueError, self.g.get_image, rating='invalid')
+
+
+class GravatarProfileTestCase(unittest.TestCase):
+    """Test case for the Gravatar class and the get_profile method."""
+
+    def setUp(self):
+        self.g = Gravatar('myemailaddress@example.com')
+
+    def test_without_params(self):
+        """Test a get_profile with default parameters."""
+        profile_url = 'http://www.gravatar.com/0bc83cb571cd1c50ba6f3e8a78ef1346'
+        result = self.g.get_profile()
+        self.assertEqual(profile_url, result)
+
+
