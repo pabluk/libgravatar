@@ -60,3 +60,8 @@ or if you have an account at Wordpress.com you can use your API Key::
     g = GravatarXMLRPC('user@domain', apikey='1234')
     g.test() # test the API
 
+
+Author and contributors
+-----------------------
+
+* Pablo SEMINARIO (`@pabluk <https://github.com/pabluk>`_)
