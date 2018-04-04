@@ -20,7 +20,7 @@ A library that provides a Python 3 interface to the Gravatar APIs.
 """
 
 __author__ = 'Pablo SEMINARIO <pabluk@gmail.com>'
-__version__ = '0.2.2'
+__version__ = '0.2.3'
 
 import sys
 
