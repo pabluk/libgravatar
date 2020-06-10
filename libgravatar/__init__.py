@@ -46,6 +46,7 @@ class Gravatar(object):
     DEFAULT_IMAGE = [
         '404',
         'mm',
+        'mp',
         'identicon',
         'monsterid',
         'wavatar',
@@ -77,7 +78,7 @@ class Gravatar(object):
         You may request image anywhere from 1px up to 2048px.
 
         The *default* parameter is used to supply a default image when an email address has no match Gravatar image.
-        *default* can be an URL or one of the built in options *404*, *mm*, *identicon*, *monsterid*, *wavatar*, *robohash*, *retro* or *blank*.
+        *default* can be an URL or one of the built in options *404*, *mm*, *mp*, *identicon*, *monsterid*, *wavatar*, *robohash*, *retro* or *blank*.  
 
         *force_default* force the default image to always load.
 
