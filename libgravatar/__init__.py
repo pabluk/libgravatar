@@ -200,8 +200,11 @@ class GravatarXMLRPC(object):
         """Test the API."""
         return self._call('test')
 
-    def _call(self, method, params={}):
+    def _call(self, method, params=None):
         """Call a method from the API, gets 'grav.' prepended to it."""
+        
+        if params is None:
+            params = {}
 
         args = {
             'apikey': self.apikey,
