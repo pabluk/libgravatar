@@ -25,7 +25,7 @@ See more details on https://libgravatar.readthedocs.org/
 Gravatar API
 ~~~~~~~~~~~~
 
-Gravatar API require no authentication to get images and profiles URLs.
+Gravatar API requires no authentication to get images and profiles URLs.
 
 Getting the user profile image::
 
@@ -45,19 +45,21 @@ Getting the profile URL::
 Gravatar XML-RPC API
 ~~~~~~~~~~~~~~~~~~~~
 
-The XML-RPC API require authentication.
+The XML-RPC API requires authentication.
 
-You can use your Gravatar.com password::
+You can use your Gravatar.com's email and password::
 
     from libgravatar import GravatarXMLRPC
-    g = GravatarXMLRPC('user@domain', password='1234')
+    g = GravatarXMLRPC('name@example.com', password='1234')
     g.test() # test the API
 
 
-or if you have an account at Wordpress.com you can use your API Key::
+or if you have an account at Wordpress.com you can use your email and
+API key. You can find your API key at https://apikey.wordpress.com/
+just be sure to pass to the function your email instead of your username::
 
     from libgravatar import GravatarXMLRPC
-    g = GravatarXMLRPC('user@domain', apikey='1234')
+    g = GravatarXMLRPC('name@example.com', apikey='1234')
     g.test() # test the API
 
 
