@@ -32,14 +32,14 @@ Getting the user profile image::
     from libgravatar import Gravatar
     g = Gravatar('myemailaddress@example.com')
     g.get_image()
-    'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346'
+    'https://secure.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346'
 
 Getting the profile URL::
 
     from libgravatar import Gravatar
     g = Gravatar('myemailaddress@example.com')
     g.get_profile()
-    'http://www.gravatar.com/0bc83cb571cd1c50ba6f3e8a78ef1346'
+    'https://secure.gravatar.com/0bc83cb571cd1c50ba6f3e8a78ef1346'
 
 
 Gravatar XML-RPC API
@@ -70,3 +70,4 @@ Author and contributors
 * Caleb FANGMEIER (`@cfangmeier <https://github.com/cfangmeier>`_)
 * Rarm NAGALINGAM (`@snowjet <https://github.com/snowjet/>`_)
 * Manan (`@mentix02 <https://github.com/mentix02/>`_)
+* Gareth Simpson (`@xurble <https://github.com/xurble/>`_)

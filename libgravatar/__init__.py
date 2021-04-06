@@ -66,7 +66,7 @@ class Gravatar(object):
         self.email = sanitize_email(email)
         self.email_hash = md5_hash(self.email)
 
-    def get_image(self, size=DEFAULT_IMAGE_SIZE, default="", force_default=False, rating="", filetype_extension=False, use_ssl=False):
+    def get_image(self, size=DEFAULT_IMAGE_SIZE, default="", force_default=False, rating="", filetype_extension=False, use_ssl=True):
         """
         Returns an URL to the user profile image.
 
@@ -125,11 +125,11 @@ class Gravatar(object):
 
         params = urlencode(params_dict)
 
-        protocol = 'http'
-        domain = 'www.gravatar.com'
-        if use_ssl:
-            protocol = 'https'
-            domain = 'secure.gravatar.com'
+        protocol = 'https'
+        domain = 'secure.gravatar.com'
+        if not use_ssl:
+            protocol = 'http'
+            domain = 'www.gravatar.com'
 
         extension = '.jpg' if filetype_extension else ''
         params = '?%s' % params if params else ''
@@ -142,7 +142,7 @@ class Gravatar(object):
         }
         return base_url.format(**data)
 
-    def get_profile(self, data_format=''):
+    def get_profile(self, data_format='', use_ssl=True):
         """
         Returns an URL to the profile information associated with the Gravatar account.
 
@@ -153,12 +153,20 @@ class Gravatar(object):
         See more details on `Gravatar Profile Requests <http://en.gravatar.com/site/implement/profiles/>`_.
 
         """
-        base_url = 'http://www.gravatar.com/{hash}{data_format}'
+        protocol = 'https'
+        domain = 'secure.gravatar.com'
+        if not use_ssl:
+            protocol = 'http'
+            domain = 'www.gravatar.com'
+        
+        base_url = '{protocol}://{domain}/{hash}{data_format}'
 
         if data_format and data_format in self.PROFILE_FORMATS:
             data_format = '.%s' % data_format
 
         data = {
+            'protocol': protocol,
+            'domain': domain,
             'hash': self.email_hash,
             'data_format': data_format,
         }
