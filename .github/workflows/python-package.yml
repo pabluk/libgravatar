@@ -19,4 +19,4 @@ jobs:
     - name: Test with nose
       run: |
         pip install nose
-        nosetests
+        nosetests --with-doctest --verbose
