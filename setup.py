@@ -7,7 +7,7 @@ with open("README.rst") as file:
 
 setup(
     name="libgravatar",
-    version="0.2.5",
+    version="1.0.0",
     author="Pablo Seminario",
     author_email="pablo@seminar.io",
     url="https://github.com/pabluk/libgravatar",
