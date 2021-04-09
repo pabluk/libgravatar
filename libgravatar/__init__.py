@@ -1,4 +1,4 @@
-# libgravatar - Copyright (c) 2009 Pablo SEMINARIO
+# libgravatar - Copyright (c) 2009 Pablo Seminario
 # This software is distributed under the terms of the GNU General
 # Public License
 #
@@ -19,7 +19,7 @@
 A library that provides a Python 3 interface to the Gravatar APIs.
 """
 
-__author__ = "Pablo SEMINARIO <pabluk@gmail.com>"
+__author__ = "Pablo Seminario <pabluk@gmail.com>"
 __version__ = "0.2.5"
 
 import sys

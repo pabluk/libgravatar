@@ -93,7 +93,7 @@ and you can validate your changes running:
 Author and contributors
 -----------------------
 
-* Pablo SEMINARIO (`@pabluk <https://github.com/pabluk>`_)
+* Pablo Seminario (`@pabluk <https://github.com/pabluk>`_)
 * Caleb FANGMEIER (`@cfangmeier <https://github.com/cfangmeier>`_)
 * Rarm NAGALINGAM (`@snowjet <https://github.com/snowjet/>`_)
 * Manan (`@mentix02 <https://github.com/mentix02/>`_)

@@ -43,7 +43,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "libgravatar"
-copyright = "2013, Pablo SEMINARIO"
+copyright = "2013, Pablo Seminario"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -187,7 +187,7 @@ latex_documents = [
         "index",
         "libgravatar.tex",
         "libgravatar Documentation",
-        "Pablo SEMINARIO",
+        "Pablo Seminario",
         "manual",
     ),
 ]
@@ -218,7 +218,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ("index", "libgravatar", "libgravatar Documentation", ["Pablo SEMINARIO"], 1)
+    ("index", "libgravatar", "libgravatar Documentation", ["Pablo Seminario"], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -235,7 +235,7 @@ texinfo_documents = [
         "index",
         "libgravatar",
         "libgravatar Documentation",
-        "Pablo SEMINARIO",
+        "Pablo Seminario",
         "libgravatar",
         "One line description of project.",
         "Miscellaneous",
