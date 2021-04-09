@@ -27,14 +27,18 @@ Gravatar API
 
 Gravatar API requires no authentication to get images and profiles URLs.
 
-Getting the user profile image::
+Getting the user profile image:
+
+.. code-block:: python
 
     from libgravatar import Gravatar
     g = Gravatar('myemailaddress@example.com')
     g.get_image()
     'https://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346'
 
-Getting the profile URL::
+Getting the profile URL:
+
+.. code-block:: python
 
     from libgravatar import Gravatar
     g = Gravatar('myemailaddress@example.com')
@@ -47,7 +51,9 @@ Gravatar XML-RPC API
 
 The XML-RPC API requires authentication.
 
-You can use your Gravatar.com's email and password::
+You can use your Gravatar.com's email and password:
+
+.. code-block:: python
 
     from libgravatar import GravatarXMLRPC
     g = GravatarXMLRPC('name@example.com', password='1234')
@@ -56,7 +62,9 @@ You can use your Gravatar.com's email and password::
 
 or if you have an account at Wordpress.com you can use your email and
 API key. You can find your API key at https://apikey.wordpress.com/
-just be sure to pass to the function your email instead of your username::
+just be sure to pass to the function your email instead of your username:
+
+.. code-block:: python
 
     from libgravatar import GravatarXMLRPC
     g = GravatarXMLRPC('name@example.com', apikey='1234')
@@ -66,13 +74,17 @@ just be sure to pass to the function your email instead of your username::
 Development
 -----------
 
-To contribute to this project or to test this library locally you'll need to install these dependencies::
+To contribute to this project or to test this library locally you'll need to install these dependencies:
+
+.. code-block:: shell
 
     python3 -m venv venv # for example on a virtual environment
     source venv/bin/activate
     pip install nose black
 
-and you can validate your changes running::
+and you can validate your changes running:
+
+.. code-block:: shell
 
     nosetests --with-doctest --verbose
     black . --check --diff
