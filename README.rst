@@ -63,6 +63,21 @@ just be sure to pass to the function your email instead of your username::
     g.test() # test the API
 
 
+Development
+-----------
+
+To contribute to this project or to test this library locally you'll need to install these dependencies::
+
+    python3 -m venv venv # for example on a virtual environment
+    source venv/bin/activate
+    pip install nose black
+
+and you can validate your changes running::
+
+    nosetests --with-doctest --verbose
+    black . --check --diff
+
+
 Author and contributors
 -----------------------
 
