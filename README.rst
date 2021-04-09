@@ -32,14 +32,14 @@ Getting the user profile image::
     from libgravatar import Gravatar
     g = Gravatar('myemailaddress@example.com')
     g.get_image()
-    'https://secure.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346'
+    'https://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346'
 
 Getting the profile URL::
 
     from libgravatar import Gravatar
     g = Gravatar('myemailaddress@example.com')
     g.get_profile()
-    'https://secure.gravatar.com/0bc83cb571cd1c50ba6f3e8a78ef1346'
+    'https://www.gravatar.com/0bc83cb571cd1c50ba6f3e8a78ef1346'
 
 
 Gravatar XML-RPC API
