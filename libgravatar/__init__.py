@@ -72,7 +72,7 @@ class Gravatar(object):
 
         >>> g = Gravatar('myemailaddress@example.com')
         >>> g.get_image()
-        'http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346'
+        'https://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346'
 
         With *size* you can request a specific image size, by default, images are presented at 80px by 80px.
         You may request image anywhere from 1px up to 2048px.
@@ -145,7 +145,7 @@ class Gravatar(object):
 
         >>> g = Gravatar('myemailaddress@example.com')
         >>> g.get_profile()
-        'http://www.gravatar.com/0bc83cb571cd1c50ba6f3e8a78ef1346'
+        'https://www.gravatar.com/0bc83cb571cd1c50ba6f3e8a78ef1346'
 
         See more details on `Gravatar Profile Requests <http://en.gravatar.com/site/implement/profiles/>`_.
 
