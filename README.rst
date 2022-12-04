@@ -80,13 +80,13 @@ To contribute to this project or to test this library locally you'll need to ins
 
     python3 -m venv venv # for example on a virtual environment
     source venv/bin/activate
-    pip install nose black
+    pip install pytest black
 
 and you can validate your changes running:
 
 .. code-block:: shell
 
-    nosetests --with-doctest --verbose
+    pytest --doctest-modules --verbose
     black . --check --diff
 
 
