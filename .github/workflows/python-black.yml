@@ -10,4 +10,4 @@ jobs:
       - uses: actions/setup-python@v4
       - uses: psf/black@stable
         with:
-          args: ". --check --diff"
+          black_args: ". --check --diff"
