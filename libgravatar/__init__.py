@@ -249,7 +249,12 @@ def md5_hash(string):
     '0bc83cb571cd1c50ba6f3e8a78ef1346'
 
     """
-    return md5(string.encode("utf-8")).hexdigest()
+    try:
+        # On security-restricted systems, indicate we are fingerprinting only:
+        return md5(string.encode("utf-8"), usedforsecurity=False).hexdigest()
+    except TypeError:
+        # On systems without usedforsecurity:
+        return md5(string.encode("utf-8")).hexdigest()
 
 
 def default_url_is_valid(url):
