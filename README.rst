@@ -98,3 +98,4 @@ Author and contributors
 * Rarm NAGALINGAM (`@snowjet <https://github.com/snowjet/>`_)
 * Manan (`@mentix02 <https://github.com/mentix02/>`_)
 * Gareth Simpson (`@xurble <https://github.com/xurble/>`_)
+* Sean Kelly (`@nutjob4life <https://github.com/nutjob4life/>`_)
